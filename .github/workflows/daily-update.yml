@@ -1,3 +1,26 @@
+name: Daily Repository Update
+
+on:
+  schedule:
+    - cron: '15 10 * * *'   # Runs daily at 10:15 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  daily-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Git
+        run: |
+          git config user.name "DevSync Automation Bot"
+          git config user.email "22f1001572@ds.study.iitm.ac.in"
+
       - name: Daily Commit Step - 22f1001572@ds.study.iitm.ac.in
         run: |
           TIMESTAMP=$(date +%s)
